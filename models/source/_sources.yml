@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    tables:
+      - name: cities_raw
+      - name: driver_status_events_raw
+      - name: drivers_raw
+      - name: payments_raw
+      - name: riders_raw
+      - name: trips_raw
+        loaded_at_field: created_at
+        freshness:
+          warn_after:
+            count: 2
+            period: hour

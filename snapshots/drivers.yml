@@ -1,0 +1,14 @@
+snapshots:
+    - name: dim_drivers_scd2
+      relation: ref('dim_drivers')
+      config:
+        schema: marts
+        database: beejanride
+        unique_key: driver_id
+        strategy: check
+        check_cols:
+            - driver_status
+            - vehicle_id
+            - rating
+        
+        dbt_valid_to_current: "timestamp(date '9999-12-31')"

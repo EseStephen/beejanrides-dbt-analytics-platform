@@ -1,0 +1,270 @@
+version: 2
+
+models:
+  - name: cities_intermediate
+    description: This table has basic information about cities.
+    columns:
+      - name: city_id
+        description: City ID
+        tests:
+          - unique
+          - not_null
+
+      - name: city_name
+        description: City name
+        tests:
+          - not_null
+
+      - name: country
+        description: Country
+        tests:
+          - not_null
+
+      - name: launch_date
+        description: City launch date
+
+  - name: driver_status_events_intermediate
+    description: High-volume event table tracking when drivers go online or offline.
+    columns:
+      - name: event_id
+        description: Unique event identifier
+        tests:
+          - unique
+          - not_null
+
+      - name: driver_id
+        description: Driver ID associated with the event
+        tests:
+          - not_null
+
+      - name: status
+        description: Driver availability status (online / offline)
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ['online', 'offline']
+
+      - name: event_timestamp
+        description: Timestamp when the status event occurred
+
+  - name: drivers_intermediate
+    description: Contains driver profile and operational information.
+    columns:
+      - name: driver_id
+        description: Driver ID
+        tests:
+          - unique
+          - not_null
+
+      - name: driver_lifetime_trips
+        description: Total number of trips by a driver
+
+      - name: onboarding_date
+        description: Date when the driver joined the platform (Driver join date)
+
+      - name: driver_status
+        description: Current driver status (active / suspended / inactive)
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ['active', 'inactive', 'suspended']
+
+      - name: city_id
+        description: City
+        tests:
+          - not_null
+
+      - name: vehicle_id
+        description: Current Vehicle
+        tests:
+          - not_null
+
+      - name: rating
+        description: Average rating
+
+      - name: created_at
+        description: Created timestamp
+
+      - name: updated_at
+        description: Updated timestamp
+
+  - name: riders_intermediate
+    description: Contains rider profile and signup information.
+    columns:
+      - name: rider_id
+        description: Rider ID
+        tests:
+          - unique
+          - not_null
+
+      - name: rider_lifetime_value
+        description: Total amaount paid for rides by a rider
+
+      - name: signup_date
+        description: Date when the rider signed up (Signup date)
+
+      - name: country
+        description: Rider country
+
+      - name: referral_code
+        description: Referral code used during signup (Referral used)
+
+      - name: created_at
+        description: Created timestamp
+
+  - name: payments_intermediate
+    description: Contains payment transactions associated with trips.
+    columns:
+      - name: payment_id
+        description: Payment ID
+        tests:
+          - unique
+          - not_null
+
+      - name: trip_id
+        description: Trip ID
+        tests:
+          - not_null
+
+      - name: payment_status
+        description: success / failed
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ['success', 'failed']
+
+      - name: payment_provider
+        description: Payment processor used (stripe / paypal)
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ['stripe', 'paypal']
+
+      
+      - name: currency
+        description: Currency
+
+      - name: amount
+        description: Charged amount
+
+      - name: fee
+        description: Processing fee
+
+      - name: net_revenue
+        description: this is the fee subtracted from the amount
+
+      - name: created_at
+        description: Payment timestamp
+
+  - name: trips_intermediate
+    description: Contains trip-level ride information including rider, driver, fare, and trip status.
+    columns:
+      - name: trip_id
+        description: Unique trip identifier
+        tests:
+          - unique
+          - not_null
+
+      - name: rider_id
+        description: Rider ID
+        tests:
+          - not_null
+
+      - name: driver_id
+        description: Driver ID
+
+      - name: vehicle_id
+        description: Vehicle used
+
+      - name: city_id
+        description: City identifier
+
+      - name: requested_at
+        description: Time ride was requested
+
+      - name: pickup_at
+        description: Pickup timestamp
+
+      - name: dropoff_at
+        description: Dropoff timestamp
+
+      - name: status
+        description: Trip status (completed / cancelled / no_show)
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ['completed', 'cancelled', 'no_show']
+
+      
+
+      - name: payment_method
+        description: Payment method used (card / wallet / cash)
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ['card', 'cash', 'wallet']
+
+      - name: is_corporate
+        description: Boolean
+        tests:
+          - accepted_values:
+              arguments:
+                  values: [true, false]
+                  quote: false
+      
+      - name: corporate_trip_flag
+        description: corporate or personal trip
+        tests:
+          - accepted_values:
+              arguments:
+                  values: ["corporate", "personal"]
+
+      - name: extreme_surge_multiplier
+        description: signifies 1 for extreme surge and 0 if not
+        tests:
+          - accepted_values:
+              arguments:
+                  values: [0, 1]
+                  quote: false
+
+      - name: failed_payment_flag
+        description: signifies a failed payment
+        tests:
+          - accepted_values:
+              arguments:
+                  values: [0, 1]
+                  quote: false  
+
+      - name: fraud_indicator
+        description: signifies a suspected fraudlent transaction
+        tests:
+          - accepted_values:
+              arguments:
+                  values: [0, 1]
+                  quote: false 
+
+      - name: duplicate_trip_payment_flag
+        description: signifies a duplicate payment
+        tests:
+          - accepted_values:
+              arguments:
+                  values: [0, 1]
+                  quote: false 
+
+      - name: created_at
+        description: Record creation timestamp
+
+      - name: updated_at
+        description: Last update timestamp
+
+      - name: estimated_fare
+        description: Initial fare estimate
+
+      - name: actual_fare
+        description: Final fare
+
+      - name: trip_duration_minutes
+        description: duration of the trip in minutes
+
+      - name: surge_multiplier
+        description: Surge applied

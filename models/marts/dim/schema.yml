@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: dim_city
+    description: Dimension table has basic information about cities.
+    columns:
+      - name: city_id
+        description: City ID
+        tests:
+          - unique
+          - not_null
+
+      - name: city_name
+        description: City name
+        tests:
+          - not_null
+
+      - name: country
+        description: Country
+        tests:
+          - not_null
+
+      - name: launch_date
+        description: City launch date
+
+  - name: dim_driver
+    description: Contains driver profile and operational information.
+    columns:
+      - name: driver_id
+        description: Driver ID
+        tests:
+          - unique
+          - not_null
+
+      - name: onboarding_date
+        description: Date when the driver joined the platform (Driver join date)
+
+      - name: driver_status
+        description: Current driver status (active / suspended / inactive)
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['active', 'inactive', 'suspended']
+
+      - name: city_id
+        description: City
+        tests:
+          - not_null
+
+      - name: vehicle_id
+        description: Current Vehicle
+        tests:
+          - not_null
+
+      - name: rating
+        description: Average rating
+
+      - name: created_at
+        description: Created timestamp
+
+      - name: updated_at
+        description: Updated timestamp
+
+  - name: dim_rider
+    description: Contains rider profile and signup information.
+    columns:
+      - name: rider_id
+        description: Rider ID
+        tests:
+          - unique
+          - not_null
+
+      - name: signup_date
+        description: Date when the rider signed up (Signup date)
+
+      - name: country
+        description: Rider country
+
+      - name: referral_code
+        description: Referral code used during signup (Referral used)
+
+      - name: created_at
+        description: Created timestamp
