@@ -21,8 +21,9 @@ This dbt project supports the following analytical use cases:
 ---
 
 ## Architecture
+<img width="624" height="307" alt="Beejan drawio" src="https://github.com/user-attachments/assets/fcf26b1f-0440-4b4d-8957-3d8292db5bc7" />
 
-![Architecture Diagram](Beejan.drawio.png)
+
 
 ### Layered Modeling Approach
 
@@ -330,10 +331,13 @@ Captures online/offline events for driver activity monitoring.
 This structure supports revenue analysis, trip operations analysis, rider value analysis, and driver event monitoring.
 
 ### ERD
-![ERD](image.png)
+<img width="500" height="341" alt="image" src="https://github.com/user-attachments/assets/4b5bd66e-9dfb-4fb9-b142-37453f336499" />
+
+
 
 ### fact_trips LINEAGE
-![LINEAGE](Lineage.png)
+<img width="688" height="338" alt="Lineage" src="https://github.com/user-attachments/assets/e0a21984-11f4-4070-81a4-b94781ae27bb" />
+
 
 ---
 
@@ -406,7 +410,8 @@ Track Slowly Changing Dimension Type 2 history for driver attributes that may ch
 
 This enables historical tracking of driver profile changes, which is important for auditability and change analysis.
 
-![Snapshot](<Screenshot 2026-03-08 215754.png>)
+<img width="809" height="110" alt="Screenshot 2026-03-08 215754" src="https://github.com/user-attachments/assets/f93497fd-90b9-4e78-86a6-a39b9020fe06" />
+
 
 ---
 
@@ -447,7 +452,9 @@ Asserts that completed trips do not carry a failed payment flag.
 
 * `trips_raw` configured with freshness warning threshold of 2 hours
 
-![tests](<Screenshot 2026-03-08 215545.png>)
+<img width="833" height="115" alt="Screenshot 2026-03-08 215545" src="https://github.com/user-attachments/assets/2ca7198d-a3b5-4b90-a3eb-b5685e54bfb5" />
+
+
 
 ---
 
@@ -518,7 +525,8 @@ join {{ ref('dim_city') }} c
 group by 1, 2
 order by 2, 1;
 ```
-![daily_revenue](daily_revenue.png)
+<img width="625" height="300" alt="daily_revenue" src="https://github.com/user-attachments/assets/2b110dc6-54f4-4f7e-88ea-d07ba653a874" />
+
 
 ### 2. Corporate vs personal revenue split
 
@@ -532,7 +540,8 @@ join {{ ref('fact_payments') }} p
     on t.trip_id = p.trip_id
 group by 1;
 ```
-![cvp](cvsp.png)
+<img width="476" height="122" alt="cvsp" src="https://github.com/user-attachments/assets/dc849e03-b37c-4f0b-a73f-716fe760782e" />
+
 
 
 ### 3. Top drivers by completed trips
@@ -548,7 +557,9 @@ group by 1
 order by completed_trips desc, total_fare desc
 limit 10;
 ```
-![topdriver](top_driver.png)
+
+<img width="404" height="215" alt="top_driver" src="https://github.com/user-attachments/assets/1174e37b-9a65-41dc-ae92-4d310f292b16" />
+
 
 
 ### 4. Payment failure rate
@@ -562,7 +573,8 @@ select
     ) as payment_failure_rate
 from {{ ref('fact_payments') }};
 ```
-![paymentfailure](payment_failure_rate.png)
+<img width="217" height="96" alt="payment_failure_rate" src="https://github.com/user-attachments/assets/582a6b21-fcc2-4356-a9af-51a22dd194fb" />
+
 
 ### 5. Surge impact analysis
 
@@ -574,7 +586,8 @@ select
 from {{ ref('fact_trips') }}
 group by 1;
 ```
-![surge](surge.png)
+<img width="531" height="131" alt="surge" src="https://github.com/user-attachments/assets/cf259813-03d2-4309-9c5f-c6c386eab90a" />
+
 
 ### 6. Fraud monitoring
 
@@ -593,9 +606,11 @@ where fraud_indicator = 1
    or failed_payment_flag = 1;
 ```
 ### Generated docs and lineage graph
-![lineage_graph](<lineage graph.png>)
-![dbtdocs1](dbtdocs1.png)
-![dbtdocs2](dbtdocs.png)
+<img width="1848" height="845" alt="lineage graph" src="https://github.com/user-attachments/assets/5ac111e0-6ff3-4e7a-bc72-d6975730ca7a" />
+
+<img width="1906" height="874" alt="dbtdocs1" src="https://github.com/user-attachments/assets/c28602c8-bc11-4961-8c4d-9c7573408ea6" />
+
+<img width="1864" height="773" alt="dbtdocs" src="https://github.com/user-attachments/assets/7fe356c6-cdc6-45bf-af76-4858952d1695" />
 
 
 ---
