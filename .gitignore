@@ -4,16 +4,16 @@ dbt_packages/
 logs/
 beejanride-47eac0bd8ea1.json
 env
-BeejanRides/profiles.yml
-BeejanRides/Beejan.drawio.png 
-BeejanRides/cvsp.png 
-BeejanRides/daily_revenue.png 
-BeejanRides/dbtdocs.png 
-BeejanRides/dbtdocs1.png 
-BeejanRides/image.png 
-BeejanRides/lineage graph.png 
-BeejanRides/Lineage.png 
-BeejanRides/payment_failure_rate.png 
-BeejanRides/Screenshot 2026-03-08 215545.png 
-BeejanRides/Screenshot 2026-03-08 215754.png 
-BeejanRides/surge.png BeejanRides/top_driver.png
+profiles.yml
+Beejan.drawio.png 
+cvsp.png 
+daily_revenue.png 
+dbtdocs.png 
+dbtdocs1.png 
+image.png 
+lineage graph.png 
+Lineage.png 
+payment_failure_rate.png 
+Screenshot 2026-03-08 215545.png 
+Screenshot 2026-03-08 215754.png 
+surge.png BeejanRides/top_driver.png
